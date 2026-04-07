@@ -96,11 +96,13 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  width: 100%;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
@@ -174,8 +176,9 @@ code, pre {
 }
 
 #root {
-  width: min(1080px, calc(100% - 48px));
+  width: min(1080px, 100%);
   margin: 0 auto;
+  padding-inline: 24px;
 }
 
 .sr-only {
@@ -192,6 +195,6 @@ code, pre {
 
 @media (max-width: 760px) {
   #root {
-    width: calc(100% - 24px);
+    padding-inline: 12px;
   }
 }

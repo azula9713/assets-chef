@@ -117,6 +117,7 @@
 .page {
   padding: 32px 0 56px;
   animation: enter 0.6s var(--ease-out) both;
+  width: 100%;
 }
 
 /* ===== Hero ===== */
@@ -204,6 +205,7 @@
   font-size: 0.88rem;
   max-width: 440px;
   margin-top: 2px;
+  text-wrap: balance;
 }
 
 /* ===== Grids ===== */
@@ -616,9 +618,8 @@
   color: var(--text-tertiary);
   font-size: 0.78rem;
   margin-top: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .color-controls {
@@ -972,6 +973,7 @@
 
 .code-input {
   width: 100%;
+  max-width: 100%;
   min-height: 220px;
   padding: 12px;
   border: 1px solid var(--border);
@@ -1043,15 +1045,20 @@
 @media (max-width: 640px) {
   .lp-mocks {
     display: grid;
-    grid-template-columns: repeat(3, auto);
-    justify-content: start;
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: stretch;
+    gap: 14px 12px;
+  }
+
+  .lp-mock {
+    width: 100%;
   }
 
   .lp-icon-frame,
   .lp-android-frame {
-    width: 88px;
-    height: 88px;
+    width: min(100%, 112px);
+    height: auto;
+    aspect-ratio: 1;
     border-radius: 20px;
   }
 
@@ -1060,42 +1067,58 @@
   }
 
   .lp-splash-frame {
-    width: 80px;
-    height: 148px;
+    width: min(100%, 96px);
+    height: auto;
+    aspect-ratio: 112 / 206;
     border-radius: 10px;
+  }
+
+  .lp-mock-label {
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
   }
 }
 
 @media (max-width: 760px) {
   .page {
-    padding: 32px 0 56px;
+    padding: 24px 0 44px;
   }
 
   .hero {
-    margin-bottom: 36px;
+    margin-bottom: 28px;
   }
 
   .zone {
-    padding-top: 28px;
+    padding-top: 22px;
   }
 
   .zone + .zone {
-    margin-top: 28px;
+    margin-top: 22px;
   }
 
   .zone-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 8px;
   }
 
   .topbar-aside {
     display: none;
   }
 
+  .topbar {
+    padding: 12px 0;
+  }
+
+  .topbar-brand {
+    gap: 10px;
+  }
+
   .upload-card-main {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
   }
 
   .upload-card-head {
@@ -1111,5 +1134,69 @@
   .generate-row {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .generate-row .btn--primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .paste-area {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+
+  .paste-area-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .btn-clear {
+    align-self: flex-start;
+  }
+
+  .code-input {
+    min-height: 180px;
+    padding: 10px;
+    font-size: 0.74rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-card {
+    padding: 10px;
+  }
+
+  .upload-empty {
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
+  }
+
+  .upload-empty strong,
+  .upload-empty span,
+  .upload-empty small {
+    display: block;
+  }
+
+  .upload-preview {
+    align-items: flex-start;
+  }
+
+  .upload-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    overflow: visible;
+  }
+
+  .upload-meta span::before {
+    content: none;
+    margin: 0;
+  }
+
+  .helper-text {
+    line-height: 1.45;
   }
 }
