@@ -373,6 +373,16 @@
   color: var(--text);
 }
 
+.btn-clear--danger {
+  background: rgba(184, 60, 34, 0.08);
+  color: #a33b28;
+}
+
+.btn-clear--danger:hover {
+  background: rgba(184, 60, 34, 0.14);
+  color: #8b2f1f;
+}
+
 /* ===== Dropzone ===== */
 
 .dropzone {
@@ -491,15 +501,27 @@
 
 .upload-status-pill {
   flex-shrink: 0;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: var(--surface-inset);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   white-space: nowrap;
+  pointer-events: none;
+}
+
+.upload-status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.55;
 }
 
 .upload-warnings {

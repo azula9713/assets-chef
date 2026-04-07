@@ -205,7 +205,7 @@ function UploadFooter({
               Adjust crop
             </button>
           ) : null}
-          <button className="btn-clear" onClick={onClear} type="button">
+          <button className="btn-clear btn-clear--danger" onClick={onClear} type="button">
             Clear
           </button>
         </div>

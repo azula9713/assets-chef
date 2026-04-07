@@ -299,11 +299,11 @@ export function IconCropModal({
             Cancel
           </button>
           <button
-            className="btn-clear"
+            className="btn-clear btn-clear--danger"
             onClick={() => applyCropArea(currentDraft.defaultCropArea)}
             type="button"
           >
-            Reset
+            Reset crop
           </button>
           <button
             className="btn btn--primary"

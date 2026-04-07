@@ -235,7 +235,7 @@ function ConfigureSection({
           </div>
           {pastedAppJson ? (
             <button
-              className="btn-clear"
+              className="btn-clear btn-clear--danger"
               onClick={() => setPastedAppJson('')}
               type="button"
             >
