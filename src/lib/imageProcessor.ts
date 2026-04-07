@@ -1,5 +1,7 @@
 import pica from 'pica'
 
+import type { CropArea } from './types'
+
 const picaInstance = pica()
 
 type CompositeOptions = {
@@ -86,6 +88,32 @@ export async function resizeImage(
     alpha: true,
   })
   return canvasToBlob(targetCanvas)
+}
+
+export async function cropImage(
+  source: Blob,
+  crop: CropArea,
+  outputWidth: number,
+  outputHeight: number,
+) {
+  const bitmap = await blobToBitmap(source)
+  const canvas = createCanvas(outputWidth, outputHeight)
+  const context = getContext(canvas)
+
+  context.drawImage(
+    bitmap,
+    crop.x,
+    crop.y,
+    crop.width,
+    crop.height,
+    0,
+    0,
+    outputWidth,
+    outputHeight,
+  )
+  bitmap.close()
+
+  return canvasToBlob(canvas)
 }
 
 export async function grayscaleImage(source: Blob) {

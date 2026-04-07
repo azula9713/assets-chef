@@ -32,7 +32,17 @@ export function useAppController() {
   const [feedback, setFeedback] = useState<string | null>(null)
   const [jsonCopied, setJsonCopied] = useState(false)
   const resultsRef = useRef<HTMLElement>(null)
-  const { uploads, clearUpload, updateUpload } = useUploads({
+  const {
+    uploads,
+    clearUpload,
+    updateUpload,
+    autoCrop,
+    setAutoCropEnabled,
+    cropDialog,
+    closeCropDialog,
+    saveCrop,
+    openCropDialog,
+  } = useUploads({
     onSuccessfulChange: () => {
       setGenerated(null)
       setFeedback(null)
@@ -159,6 +169,12 @@ export function useAppController() {
     pastedExpoName,
     setPastedAppJson,
     setPlatformFilter,
+    autoCrop,
+    setAutoCropEnabled,
+    cropDialog,
+    closeCropDialog,
+    saveCrop,
+    openCropDialog,
     updateUpload,
     clearUpload,
     updateConfig,

@@ -1,11 +1,5 @@
 import { mergeAppJson } from '../appJson'
-import type {
-  AssetManifest,
-  GeneratedAssets,
-  PlatformFilter,
-  UploadSlot,
-  UserInputs,
-} from '../types'
+import type { AssetManifest, GeneratedAssets, PlatformFilter, UploadSlot, UserInputs } from '../types'
 import type { AppConfig, UploadState } from './config'
 import { UPLOAD_SLOT_TITLES } from './config'
 
@@ -39,18 +33,25 @@ export function collectInputs(
   uploads: Record<UploadSlot, UploadState>,
   config: AppConfig,
 ): UserInputs | null {
-  if (!uploads.light.upload || !uploads.splash.upload) return null
+  const lightIcon = uploads.light.upload
+  const darkIcon = uploads.dark.upload
+  const splashImage = uploads.splash.upload
+  const splashImageDark = uploads.splashDark.upload
+
+  if (!lightIcon || !splashImage || lightIcon.kind !== 'icon' || splashImage.kind !== 'splash') {
+    return null
+  }
 
   return {
     adaptiveIconBackgroundColor: config.adaptiveIconBackgroundColor,
     appName: config.appName,
     appShortName: config.appShortName,
-    darkIcon: uploads.dark.upload,
-    lightIcon: uploads.light.upload,
+    darkIcon: darkIcon?.kind === 'icon' ? darkIcon : undefined,
+    lightIcon,
     splashBackgroundDark: config.splashBackgroundDark,
     splashBackgroundLight: config.splashBackgroundLight,
-    splashImage: uploads.splash.upload,
-    splashImageDark: uploads.splashDark.upload,
+    splashImage,
+    splashImageDark: splashImageDark?.kind === 'splash' ? splashImageDark : undefined,
   }
 }
 

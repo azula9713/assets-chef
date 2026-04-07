@@ -187,15 +187,15 @@ async function createSplashAsset(
 }
 
 export async function generateAssets(inputs: UserInputs): Promise<GeneratedAssets> {
-  const lightSource = inputs.lightIcon.file
-  const darkSource = inputs.darkIcon?.file ?? inputs.lightIcon.file
+  const lightSource = inputs.lightIcon.blob
+  const darkSource = inputs.darkIcon?.blob ?? inputs.lightIcon.blob
   const splashLightAsset = inputs.splashImage
   const splashDarkAsset = inputs.splashImageDark ?? inputs.splashImage
   const splashLightSource = splashLightAsset.file
   const splashDarkSource = splashDarkAsset.file
 
-  const expoIcon = await resizeImage(lightSource, 1024, 1024)
-  const expoDarkIcon = await resizeImage(darkSource, 1024, 1024)
+  const expoIcon = lightSource
+  const expoDarkIcon = darkSource
   const expoTintedIcon = await grayscaleImage(expoIcon)
   const adaptiveBackground = await createSolidImage(
     1024,

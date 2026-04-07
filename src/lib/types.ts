@@ -2,12 +2,35 @@ type Platform = 'expo' | 'ios' | 'android' | 'web'
 
 export type PlatformFilter = 'all' | Platform
 
-export type UploadKind = 'icon' | 'splash'
+type UploadKind = 'icon' | 'splash'
 
 export type UploadSlot = 'light' | 'dark' | 'splash' | 'splashDark'
 
-export type ValidatedUpload = {
+export type IconUploadSlot = Extract<UploadSlot, 'light' | 'dark'>
+
+export type CropArea = {
+  height: number
+  width: number
+  x: number
+  y: number
+}
+
+export type IconCropStatus = 'auto' | 'custom' | 'original'
+
+export type ImageSource = {
   file: File
+  height: number
+  url: string
+  width: number
+}
+
+type IconCrop = {
+  area: CropArea
+  effectivePixels: number
+  status: IconCropStatus
+}
+
+type BaseValidatedUpload = {
   height: number
   kind: UploadKind
   url: string
@@ -15,16 +38,30 @@ export type ValidatedUpload = {
   width: number
 }
 
+export type ValidatedIconUpload = BaseValidatedUpload & {
+  blob: Blob
+  crop: IconCrop
+  kind: 'icon'
+  source: ImageSource
+}
+
+export type ValidatedSplashUpload = BaseValidatedUpload & {
+  file: File
+  kind: 'splash'
+}
+
+export type ValidatedUpload = ValidatedIconUpload | ValidatedSplashUpload
+
 export type UserInputs = {
   adaptiveIconBackgroundColor: string
   appName: string
   appShortName: string
-  darkIcon?: ValidatedUpload
-  lightIcon: ValidatedUpload
+  darkIcon?: ValidatedIconUpload
+  lightIcon: ValidatedIconUpload
   splashBackgroundDark: string
   splashBackgroundLight: string
-  splashImage: ValidatedUpload
-  splashImageDark?: ValidatedUpload
+  splashImage: ValidatedSplashUpload
+  splashImageDark?: ValidatedSplashUpload
 }
 
 export type AssetEntry = {
